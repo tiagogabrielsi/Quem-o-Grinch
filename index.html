@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎄 Quem é o Grinch? 🎅</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="game-header">
+        <h1><span class="icon">🎄</span> Quem é o Grinch? <span class="icon">🎅</span></h1>
+        <p>Descubra quem recebeu a pergunta errada!</p>
+    </header>
+
+    <div id="screen-setup" class="game-card active">
+        <h2>Quantos jogadores?</h2>
+        <input type="number" id="num-players" min="3" max="20" value="4">
+        <p class="small-text">Mínimo de 3 jogadores</p>
+        <button onclick="goToNameSetup()">
+            <i data-feather="users"></i> Definir Nomes
+        </button>
+    </div>
+
+    <div id="screen-name-setup" class="game-card hidden">
+        <h2>Quem vai jogar?</h2>
+        <div id="names-container" class="name-input-list">
+            </div>
+        <button onclick="startFirstGame()">
+            <i data-feather="play-circle"></i> Começar Jogo
+        </button>
+    </div>
+
+    <div id="screen-pass" class="game-card hidden">
+        <h2>Passe para: <br><span id="player-turn-display" class="highlight-name">Nome</span></h2>
+        <p>Não deixe ninguém ver a tela!</p>
+        <div class="icon-pass">
+            <i data-feather="smartphone"></i> <i data-feather="arrow-right"></i>
+        </div>
+        <button onclick="revealQuestion()">
+            <i data-feather="eye"></i> Revelar Minha Pergunta
+        </button>
+    </div>
+
+    <div id="screen-question" class="game-card hidden">
+        <h3>Olá, <span id="current-player-name">Nome</span></h3>
+        <div class="role-reveal" id="question-text">...</div>
+        <input type="text" id="player-answer" placeholder="Sua resposta aqui..." autocomplete="off">
+        <button onclick="submitAnswer()">
+            <i data-feather="chevron-right"></i> Próximo
+        </button>
+    </div>
+
+    <div id="screen-discussion" class="game-card hidden">
+        <h2>📝 As Respostas</h2>
+        <p>A pergunta oficial foi:</p>
+        <h3 class="official-question" id="official-question-display"></h3>
+        
+        <div id="answers-container" class="answer-list">
+            </div>
+
+        <p class="discussion-text">Discutam! Quem deu uma resposta que não faz sentido?</p>
+        <button onclick="goToVoting()">
+            <i data-feather="user-check"></i> Hora de Votar
+        </button>
+    </div>
+
+    <div id="screen-voting" class="game-card hidden">
+        <h2>Quem é o Impostor?</h2>
+        <p>O grupo decidiu votar em:</p>
+        <div id="voting-buttons"></div>
+    </div>
+
+    <div id="screen-result" class="game-card hidden">
+        <h2 id="result-title"></h2>
+        <p id="result-message"></p>
+        
+        <div class="result-box">
+            <p><strong>O Impostor era:</strong> <span id="real-impostor"></span></p>
+            <p><strong>A pergunta dele era:</strong> <br><span id="impostor-question-text" class="impostor-question-final"></span></p>
+        </div>
+
+        <div class="end-game-options">
+            <button onclick="nextRoundSamePlayers()" class="btn-green">
+                <i data-feather="repeat"></i> Próxima Rodada
+            </button>
+            
+            <button onclick="modifyPlayers()">
+                <i data-feather="users"></i> Mudar Jogadores
+            </button>
+            
+            <button onclick="endGame()" class="btn-outline">
+                <i data-feather="x-circle"></i> Terminar Jogo
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
+        feather.replace(); 
+    </script>
+    
+    <script src="script.js"></script>
+</body>
+</html>
